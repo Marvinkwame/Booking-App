@@ -1,0 +1,54 @@
+.article-title {
+    text-align: center;
+    font-size: 2.5rem;
+}
+
+.article-text {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.articles {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.article {
+  position: relative;
+  width: 330px;
+  height: 330px;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.article-img {
+  height: 330px;
+  transition: 0.4s;
+  object-fit: cover;
+}
+
+.article-img:hover {
+  transform: scale(1.2);
+}
+
+.article-detail {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1rem;
+  color: white;
+  font-weight: 500;
+}
+
+
+@media screen and (max-width: 600px) {
+  .article-title {
+    font-size: 1.7rem;
+  }
+
+  .articles {
+    flex-direction: column;
+  }
+}

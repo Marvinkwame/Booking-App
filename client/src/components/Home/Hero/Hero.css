@@ -1,0 +1,51 @@
+.hero {
+    background-image: url('../../../assets/hero.avif');
+    padding-block: 250px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: rgb(170, 170, 170);
+    background-blend-mode: multiply;
+    color: white;
+}
+
+.content {
+    text-align: center;
+}
+
+.hero-title {
+    font-size: 3.2rem;
+}
+
+.hero-text {
+    font-size: 1.9rem;
+    width: 70%;
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 380px) {
+    .content {
+    }
+
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .hero-text {
+        font-size: 1.2rem;
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .content {
+    }
+
+    .hero-title {
+        font-size: 1.6rem;
+    }
+
+    .hero-text {
+        font-size: 1.3rem;
+    }
+
+}

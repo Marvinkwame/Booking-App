@@ -1,0 +1,35 @@
+.footer-section {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+}
+
+.footer-socials {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.footer-links {
+    border: 2px solid black;
+    display: grid;
+    row-gap: 2rem;
+}
+
+.footer-links li a {
+    text-decoration: none;
+    color: black;
+}
+
+.footer-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+@media screen and (max-width: 380px) {
+    .footer-section {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
