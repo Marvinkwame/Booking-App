@@ -1,0 +1,120 @@
+.hotel-section {
+  margin-top: 5rem;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.testimonial-grid {
+  display: grid;
+  gap: .4rem;
+  grid-template-columns: repeat(4, 1fr);
+
+  padding-block: 2rem;
+  width: 100%;
+  margin-inline: auto;
+  grid-template-areas:
+    "one one two two"
+    "one one three four";
+}
+
+.box-img {
+  height: 100%;
+  object-fit: cover;
+}
+
+.box1-img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.box:nth-child(1) {
+  grid-area: one;
+}
+
+.box:nth-child(2) {
+  grid-area: two;
+  width: 100%;
+}
+.box:nth-child(3) {
+  grid-area: three;
+}
+.box:nth-child(4) {
+  grid-area: four;
+}
+
+.grid-span-2 {
+  grid-column: span 2;
+}
+
+.grid-row-span {
+  grid-row: span 2;
+}
+
+.lists {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.list {
+  background-color: lightgrey;
+  padding: .4rem .95rem;
+  border-radius: .6rem;
+}
+
+.location-details {
+  display: flex;
+  align-items: center; 
+  margin-top: 2rem;
+  gap: 3rem;
+}
+
+.location-detail {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.desc-box, .amenities-box {
+  margin-top: 2rem;
+}
+
+.description {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.desc-content {
+  width: 75%;
+}
+
+.amenities-box {
+  width: 60%;
+}
+
+.amenities {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.amenity-box {
+  border: 2px solid brown;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.3rem .9rem;
+  border-radius: .7rem;
+  cursor: pointer;
+  transform: all .7ms ease-in-out;
+}
+
+.amenity-box:hover {
+  background-color: rgb(62, 106, 133);
+}
