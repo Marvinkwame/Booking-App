@@ -6,6 +6,7 @@ const Login = () => {
   return (
     <section className="login">
       <div className="first-section">
+      <Link to="/">Back to Home</Link>
         <h2>Login into your account</h2>
         <p>Enter your crendtials to access your account</p>
         <form
