@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require('cors');
 const hotelRoutes = require('./routes/hotelRoutes');
+const authRoutes = require('./routes/authRoutes');
 
 dotenv.config();
 app.use(cors({ origin: "http://localhost:5173", credentials: true }));
@@ -34,6 +35,7 @@ app.use((err, req, res, next) => {
 });
 
 app.use("/api/hotels", hotelRoutes);
+app.use("/api/auth", authRoutes);
 
 app.listen(8800, () => {
   connect();
