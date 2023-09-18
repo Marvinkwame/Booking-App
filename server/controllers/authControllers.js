@@ -1,5 +1,7 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
+const { createError } = require("../utils/error");
+const jwt = require("jsonwebtoken");
 
 const registerUser = async (req, res, next) => {
   try {
@@ -37,4 +39,34 @@ const registerUser = async (req, res, next) => {
   }
 };
 
-module.exports = { registerUser };
+const userLogin = async (req, res, next) => {
+  try {
+    const foundUser = await User.findOne({ username: req.body.username });
+    if (!foundUser) return next(createError(404, "User not found"));
+
+    const validatePassword = await bcrypt.compare(
+      req.body.password,
+      foundUser.password
+    );
+
+    if (!validatePassword) return next(createError(400, "Wrong Password"));
+
+    const token = jwt.sign(
+      {
+        id: foundUser._id,
+        isAdmin: foundUser.isAdmin,
+      },
+      process.env.JWT
+    );
+
+    const { password, isAdmin, ...otherinfo } = foundUser._doc;
+    res
+      .cookie("access_token", token, { httpOnly: true })
+      .status(200)
+      .json({ ...otherinfo });
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports = { registerUser, userLogin };

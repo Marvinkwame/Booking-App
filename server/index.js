@@ -5,10 +5,13 @@ const dotenv = require("dotenv");
 const cors = require('cors');
 const hotelRoutes = require('./routes/hotelRoutes');
 const authRoutes = require('./routes/authRoutes');
+const cookieParser = require('cookie-parser');
 
 dotenv.config();
 app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 app.use(express.json());
+//middleware for cookies
+app.use(cookieParser());
 
 const connect = async () => {
   try {
