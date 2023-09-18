@@ -5,6 +5,7 @@ const dotenv = require("dotenv");
 const cors = require('cors');
 const hotelRoutes = require('./routes/hotelRoutes');
 const authRoutes = require('./routes/authRoutes');
+const userRoutes = require('./routes/userRoutes');
 const cookieParser = require('cookie-parser');
 
 dotenv.config();
@@ -39,6 +40,7 @@ app.use((err, req, res, next) => {
 
 app.use("/api/hotels", hotelRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/users", userRoutes)
 
 app.listen(8800, () => {
   connect();

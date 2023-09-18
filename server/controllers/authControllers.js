@@ -41,25 +41,25 @@ const registerUser = async (req, res, next) => {
 
 const userLogin = async (req, res, next) => {
   try {
-    const foundUser = await User.findOne({ username: req.body.username });
-    if (!foundUser) return next(createError(404, "User not found"));
+    const user = await User.findOne({ username: req.body.username });
+    if (!user) return next(createError(404, "User not found"));
 
     const validatePassword = await bcrypt.compare(
       req.body.password,
-      foundUser.password
+      user.password
     );
 
     if (!validatePassword) return next(createError(400, "Wrong Password"));
 
     const token = jwt.sign(
       {
-        id: foundUser._id,
-        isAdmin: foundUser.isAdmin,
+        id: user._id,
+        isAdmin: user.isAdmin,
       },
       process.env.JWT
     );
 
-    const { password, isAdmin, ...otherinfo } = foundUser._doc;
+    const { password, isAdmin, ...otherinfo } = user._doc;
     res
       .cookie("access_token", token, { httpOnly: true })
       .status(200)
