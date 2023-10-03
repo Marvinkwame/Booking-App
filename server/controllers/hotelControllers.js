@@ -39,10 +39,10 @@ const getSingleHotel = async (req, res, next) => {
   try {
     const singleHotel = await Hotel.findById(req.params.id);
     res.status(200).json(singleHotel);
-  } catch(err) {
-    next(err)
+  } catch (err) {
+    next(err);
   }
-}
+};
 
 //Getting all Hotels
 const getAllHotels = async (req, res, next) => {
@@ -50,12 +50,62 @@ const getAllHotels = async (req, res, next) => {
   try {
     const hotels = await Hotel.find({
       ...others,
-      cheapestPrice: { $gt: min | 1, $lt: max | 999 },
+      cheapestPrice: { $gt: min | 1, $lt: max ||  999 },
     }).limit(req.query.limit);
     res.status(200).json(hotels);
-  } catch(err) {
+  } catch (err) {
     next(err);
+  }
+};
+
+const countByCity = async (req, res, next) => {
+  const cities = req.query.cities.split(","); //makes the query an array of cities 
+  try {
+    const list = await Promise.all(
+      cities.map((city) => {
+        return Hotel.countDocuments({ city: city });
+      })
+    );
+    res.status(200).json(list);
+  } catch (err) {
+    next(err);
+  }
+};
+
+const countByType = async (req, res, next) => {
+  try {
+    const hotelCount = await Hotel.countDocuments({ type: 'Hotel' });
+    const apartmentCount = await Hotel.countDocuments({ type: 'Apartment' });
+    const resortCount = await Hotel.countDocuments({ type: 'Resort' });
+    const villasCount = await Hotel.countDocuments({ type: 'Villa'});
+    const cabinsCount = await Hotel.countDocuments({ type: 'Cabin'})
+    const cottagesCount = await Hotel.countDocuments({ type: 'Cottage'})
+    const vacationHomeCount = await Hotel.countDocuments({ type: 'Vacation home'})
+    const motelCount = await Hotel.countDocuments({ type: 'Motel'})
+    
+
+    res.status(200).json([
+      { type: 'Hotel', count: hotelCount },
+      { type:'Apartment', count : apartmentCount},
+      { type:'Resort', count : resortCount },
+      { type:"Villas", count : villasCount } ,
+      { type:"Cabins" , count : cabinsCount },
+      { type:"Cottages" , count : cottagesCount },
+      { type :"Vacation Homes" , count : vacationHomeCount },
+      { type :"Motels" , count : motelCount },
+    ])
+
+  } catch (err) {
+    next(err)
   }
 }
 
-module.exports = { createHotel, updateHotel, deleteHotel, getSingleHotel, getAllHotels };
+module.exports = {
+  createHotel,
+  updateHotel,
+  deleteHotel,
+  getSingleHotel,
+  getAllHotels,
+  countByCity,
+  countByType,
+};

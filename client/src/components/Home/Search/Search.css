@@ -80,9 +80,9 @@
 }
 
 .search-btn {
-    background-color: black;
+    background-color: #051bce !important;
     color: azure;
-    width: 150px;
+    width: 350px !important;
     height: 40px;
     cursor: pointer;
     margin-top: 3rem;

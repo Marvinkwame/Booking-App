@@ -6,10 +6,11 @@ const cors = require('cors');
 const hotelRoutes = require('./routes/hotelRoutes');
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
+const roomRoutes = require('./routes/roomRoutes');
 const cookieParser = require('cookie-parser');
 
 dotenv.config();
-app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 app.use(express.json());
 //middleware for cookies
 app.use(cookieParser());
@@ -40,7 +41,8 @@ app.use((err, req, res, next) => {
 
 app.use("/api/hotels", hotelRoutes);
 app.use("/api/auth", authRoutes);
-app.use("/api/users", userRoutes)
+app.use("/api/users", userRoutes);
+app.use("/api/rooms", roomRoutes);
 
 app.listen(8800, () => {
   connect();

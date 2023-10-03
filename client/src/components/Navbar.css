@@ -18,7 +18,8 @@
 }
 
 .nav-logo {
-  color: blue;
+  color: #051bce;
+  font-size: 3rem;
   font-weight: 600;
   font-style: italic;
 }
@@ -35,7 +36,7 @@
 
 .nav-links a {
   margin: 0 1rem;
-  color: black;
+  color: #051bce;
   padding: 0.5rem;
   list-style: none;
   text-decoration: none;

@@ -36,6 +36,8 @@
   position: absolute;
   bottom: 1.5rem;
   left: 1rem;
+  color: black; 
+  font-weight: 800;
 }
 
 @media screen and (max-width: 380px) {

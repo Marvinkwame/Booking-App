@@ -30,7 +30,7 @@ const verifyUser = (req, res, next) => {
 
 const verifyAdmin = (req, res, next) => {
   //To verify an admin, you need to be authenticated and also have role of 'admin'
-  verifyToken(req, res,  () => {
+  verifyToken(req, res, next, () => {
     if (req.user.isAdmin) {
       next();
     } else {
