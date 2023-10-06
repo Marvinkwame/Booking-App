@@ -47,12 +47,12 @@ const Hotel = () => {
         </main>
 
         <div className="lists">
-          <p className="list">Working Space</p>
-          <p className="list">General Event</p>
-          <p className="list">Cozy</p>
-          <p className="list">Cozy</p>
-          <p className="list">Cozy</p>
-          <p className="list">Cozy</p>
+          <p className="list">Free WiFi</p>
+          <p className="list">Washing machine</p>
+          <p className="list">Balcony</p>
+          <p className="list">Bathtub</p>
+          <p className="list">Air conditioning</p>
+          <p className="list">Heating</p>
         </div>
 
         <div className="location-details">

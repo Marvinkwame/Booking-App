@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { FaLocationArrow } from "react-icons/fa";
 import { BsCalendar2DayFill, BsFillPersonFill } from "react-icons/bs";
 import { DateRange } from "react-date-range";
@@ -6,10 +6,13 @@ import { format } from "date-fns";
 import "./Search.css";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
+import { SearchContext } from "../../../context/SearchContext";
+import { useNavigate } from "react-router-dom";
 
 const Search = () => {
   const [openDate, setOpenDate] = React.useState(false);
-  const [state, setState] = useState([
+  const [destination, setDestination] = React.useState("")
+  const [date, setDate] = useState([
     {
       startDate: new Date(),
       endDate: new Date(),
@@ -23,6 +26,11 @@ const Search = () => {
     room: 1,
   });
 
+  const navigate = useNavigate();
+
+  //searchContext
+  const { dispatchSearch } = useContext(SearchContext)
+
   const openDates = () => {
     setOpenDate((prevDate) => !prevDate);
   };
@@ -35,6 +43,11 @@ const Search = () => {
       };
     });
   };
+
+  const handleSearch = () => {
+    dispatchSearch({ type: "NEW_SEARCH", payload: { destination, date, options }});
+    navigate("/hotels", { state: { destination, date, options }})
+  }
 
   return (
     <section className="padding-block-900">
@@ -56,6 +69,7 @@ const Search = () => {
                   name=""
                   id=""
                   placeholder="California"
+                  onChange={(e) => setDestination(e.target.value)}
                 />
               </div>
             </div>
@@ -65,17 +79,17 @@ const Search = () => {
               <div className="detail">
                 <p onClick={openDates} style={{ cursor: "pointer" }}>
                   <BsCalendar2DayFill />
-                  {`${format(state[0].startDate, "MM/dd/yyyy")} to ${format(
-                    state[0].endDate,
+                  {`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(
+                    date[0].endDate,
                     "MM/dd/yyyy"
                   )}`}
                 </p>
                 {openDate && (
                   <DateRange
                     editableDateInputs={true}
-                    onChange={(item) => setState([item.selection])}
+                    onChange={(item) => setDate([item.selection])}
                     moveRangeOnFirstSelection={false}
-                    ranges={state}
+                    ranges={date}
                     className="date"
                     minDate={new Date()}
                   />
@@ -163,7 +177,8 @@ const Search = () => {
               </div>
             </div>
 
-            <button className="btn search-btn">Search</button>
+            <button className="btn search-btn" onClick={handleSearch}>Search</button>
+            
           </div>
         </div>
       </div>

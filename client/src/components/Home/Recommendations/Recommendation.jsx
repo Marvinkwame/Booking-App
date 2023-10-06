@@ -5,6 +5,15 @@ import useFetch from "../../../hooks/useFetch";
 
 const Recommendation = () => {
   const { data, isLoading, error } = useFetch("/hotels?featured=true");
+
+  const generateRandomNumber = () => {
+    const randomNumber = (Math.random() + 4).toFixed(2); // Generate a random number between 0 and 1, add 4, and round to three decimal places
+    return parseFloat(randomNumber); // Parse the result back to a float
+  };
+
+  
+
+  
   console.log(data);
   return (
     <section className="padding-block-900 recommedation">
@@ -32,11 +41,12 @@ const Recommendation = () => {
                         <h3>{item.name}</h3>
                         <span style={{ display: "flex", alignItems: "center" }}>
                           <AiFillStar style={{ color: "orange" }} />
-                          4.90
+                          {generateRandomNumber()}
                         </span>
                       </div>
                       <p style={{ padding: ".5rem" }}>
-                        Tour package 3 days 2 nights with a good and friendly tour guide.
+                        Tour package 3 days 2 nights with a good and friendly
+                        tour guide.
                       </p>
                       <div className="bottom">
                         <p>${item.cheapestPrice}</p>
