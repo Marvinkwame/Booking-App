@@ -6,6 +6,7 @@ import { format } from "date-fns";
 import "./SearchBar.css";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
+import useFetch from "../../../hooks/useFetch";
 
 const SearchBar = () => {
   const [openDate, setOpenDate] = React.useState(false);
@@ -23,6 +24,8 @@ const SearchBar = () => {
     room: 1,
   });
 
+  
+
   const openDates = () => {
     setOpenDate((prevDate) => !prevDate);
   };
@@ -36,12 +39,14 @@ const SearchBar = () => {
     });
   };
 
+  
+
   return (
     <section className="padding-block-900">
       <div className="container">
         <div className="search-form">
           <h2 className="search-title">Your Location</h2>
-          <p className="search-location">California, USA</p>
+          <p className="search-location">Californ, USA</p>
           <hr />
 
           <div className="booking-group">

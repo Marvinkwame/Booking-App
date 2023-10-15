@@ -7,7 +7,7 @@ const Recommendation = () => {
   const { data, isLoading, error } = useFetch("/hotels?featured=true");
 
   const generateRandomNumber = () => {
-    const randomNumber = (Math.random() + 4).toFixed(2); // Generate a random number between 0 and 1, add 4, and round to three decimal places
+    const randomNumber = (Math.random() + 4).toFixed(1); // Generate a random number between 0 and 1, add 4, and round to three decimal places
     return parseFloat(randomNumber); // Parse the result back to a float
   };
 
@@ -41,7 +41,7 @@ const Recommendation = () => {
                         <h3>{item.name}</h3>
                         <span style={{ display: "flex", alignItems: "center" }}>
                           <AiFillStar style={{ color: "orange" }} />
-                          {generateRandomNumber()}
+                          {generateRandomNumber()} / 5
                         </span>
                       </div>
                       <p style={{ padding: ".5rem" }}>
