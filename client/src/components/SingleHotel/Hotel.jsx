@@ -1,18 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import { BiMap } from "react-icons/bi";
 import { BsPeopleFill } from "react-icons/bs";
 import { CgLoadbar } from "react-icons/cg";
 import { FaRegLightbulb } from 'react-icons/fa';
 import { GiWaterDrop } from "react-icons/gi";
 import { LuSpeaker } from "react-icons/lu";
+import useFetch from "../../hooks/useFetch";
 import "./Hotel.css";
+import { useLocation } from "react-router-dom";
 
 const Hotel = () => {
+  const location = useLocation();
+  const id = location.pathname.split("/")[2];
+  const { data, isLoading, error } = useFetch(`/hotels/find/${id}`);
+  const [openModal, setOpenModal] = useState(false);
+  console.log(data);
+  console.log(id);
+
+
   return (
     <section className="padding-block-900">
-      <div className="container hotel-section">
+      {isLoading ? ( "Loading" ) : (
+        <div className="container hotel-section">
         <div className="top">
-          <h2>The KasoaBurj Khalifa</h2>
+          <h2>{data.name}</h2>
 
           <button className="btn book-btn">Reserve</button>
         </div>
@@ -60,7 +71,7 @@ const Hotel = () => {
             <BiMap style={{ fontSize: "1rem" }} />
             <div>
               <h3>International City</h3>
-              <p>Dubai</p>
+              <p>{data.city}</p>
             </div>
           </div>
 
@@ -80,10 +91,7 @@ const Hotel = () => {
           </h3>
 
           <p className="desc-content">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Mollitia
-            impedit ab laborum et illum atque aspernatur esse illo similique
-            ratione voluptate labore ducimus perferendis, qui vero reprehenderit
-            quia sunt temporibus.
+            {data.description}
           </p>
         </div>
 
@@ -121,8 +129,9 @@ const Hotel = () => {
           </div>
         </div>
 
-        <button className="btn book-btn">Book Now</button>
       </div>
+      )}
+      
     </section>
   );
 };

@@ -14,6 +14,7 @@ import { useLocation } from "react-router-dom";
 const SearchHotel = () => {
   const location = useLocation();
   const [destination, setDestination] = useState(location.state.destination);
+  const [newDestination, setNewDestination] = useState("");
   const [state, setState] = useState(location.state.date);
   const [options, setOptions] = useState(location.state.options);
   const [openOptions, setOpenOptions] = useState(false);
@@ -22,7 +23,9 @@ const SearchHotel = () => {
   const [max, setMax] = useState(undefined);
 
   const { data, isLoading, error, reFetch } = useFetch(
-    `/hotels?city=${destination}&min=${min || 0}&max=${max || 999}`
+    `/hotels?city=${newDestination ? newDestination : destination}&min=${
+      min || 0
+    }&max=${max || 999}`
   );
 
   console.log(location);
@@ -67,6 +70,7 @@ const SearchHotel = () => {
                     name=""
                     id=""
                     placeholder={destination}
+                    onChange={(e) => setNewDestination(e.target.value)}
                   />
                 </div>
               </div>
@@ -206,6 +210,12 @@ const SearchHotel = () => {
           </div>
         </div>
       </section>
+      {data.length > 1 && (
+        <p className="search-info">
+          <span className="destination">{newDestination || destination}</span>: {data.length}{" "}
+          properties found.
+        </p>
+      )}
       {isLoading ? (
         <p>Loading.......</p>
       ) : (
@@ -216,10 +226,11 @@ const SearchHotel = () => {
         </>
       )}
 
-      {data < 1 && (
+      
+      {data.length == 0 && (
         <p className="search-info">
           {" "}
-          <span className="destination">{destination}</span>: No Properties
+          <span className="destination">{newDestination || destination}</span>: No Properties
           Available
         </p>
       )}

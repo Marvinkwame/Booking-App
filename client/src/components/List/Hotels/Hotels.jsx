@@ -93,8 +93,6 @@ const Hotels = (props) => {
             </div>
           )}
 
-          {!props.item < 1 && <p>{}</p> }
-
           {/* second hotel */}
         </div>
       </div>
