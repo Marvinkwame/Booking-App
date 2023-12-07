@@ -1,12 +1,42 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import "./Login.css";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 
 const Login = () => {
+  const [userData, setUserData] = useState({
+    username: "",
+    password: "",
+  });
+
+  const { user, loading, error, dispatchAuth } = useContext(AuthContext);
+
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setUserData((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+  };
+
+  const handleClick = async (e) => {
+    e.preventDefault();
+    dispatchAuth({ type: "LOGIN_START" });
+    try {
+      const res = await axios.post("auth/login", userData);
+      dispatchAuth({ type: "LOGIN_SUCCESS", payload: res.data });
+      navigate("/");
+    } catch (err) {
+      dispatchAuth({ type: "LOGIN_FAILED", payload: err.response.data });
+    }
+  };
+
+  console.log(user);
+
   return (
     <section className="login">
       <div className="first-section">
-      <Link to="/">Back to Home</Link>
+        <Link to="/">Back to Home</Link>
         <h2>Login into your account</h2>
         <p>Enter your crendtials to access your account</p>
         <form
@@ -17,14 +47,27 @@ const Login = () => {
             width: "70%",
             marginTop: "1.5rem",
           }}
+          onSubmit={handleClick}
         >
           <div className="form-element">
-            <label htmlFor="email">Email</label>
-            <input type="email" name="" id="" className="" />
+            <label htmlFor="text">Username</label>
+            <input
+              type="text"
+              name="username"
+              id="username"
+              className=""
+              onChange={handleChange}
+            />
           </div>
           <div className="form-element">
             <label htmlFor="">Password</label>
-            <input type="password" name="" id="" className="" />
+            <input
+              type="password"
+              name="password"
+              id="password"
+              className=""
+              onChange={handleChange}
+            />
           </div>
 
           <div className="form-password">
@@ -36,10 +79,19 @@ const Login = () => {
             <p>Forget Password?</p>
           </div>
 
-          <button className="btn signin-btn">Sign In</button>
+          <button type="submit" className="btn signin-btn">
+            Sign In
+          </button>
           <p style={{ textAlign: "center" }}>
-            Don't have an account? <Link to="/register" style={{ color: "blueviolet", fontWeight: "900" }}>Register here</Link>
+            Don't have an account?{" "}
+            <Link
+              to="/register"
+              style={{ color: "blueviolet", fontWeight: "900" }}
+            >
+              Register here
+            </Link>
           </p>
+          {error && <span>{error.message}</span>}
         </form>
       </div>
 

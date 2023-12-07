@@ -4,9 +4,13 @@
     display: flex;
 }
 
-.first-section, .second-section {
+.first-section {
     width: 100%;
     height: 100%;
+}
+
+.second-section {
+    height: 100vh;
 }
 
 .first-section {
@@ -49,7 +53,7 @@
 
 .form-image {
     width: 100%;
-    height: 100%;
+    height: 100vh;
     object-fit: cover;
 }
 

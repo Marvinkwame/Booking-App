@@ -10,15 +10,56 @@
 
 .testimonial-grid {
   display: grid;
-  gap: .4rem;
+  gap: 0.4rem;
   grid-template-columns: repeat(4, 1fr);
-
   padding-block: 2rem;
   width: 100%;
   margin-inline: auto;
   grid-template-areas:
     "one one two two"
     "one one three four";
+}
+
+.slider {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.613);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+}
+
+.slider-wrapper{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slider-image{
+  width: 60%;
+  height: 80vh;
+  
+}
+
+.close{
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 30px;
+  color: lightgray;
+  cursor: pointer;
+}
+
+.arrow{
+  margin: 20px;
+  font-size: 50px;
+  color: lightgray;
+  cursor: pointer;
 }
 
 .box-img {
@@ -62,13 +103,13 @@
 
 .list {
   background-color: lightgrey;
-  padding: .4rem .95rem;
-  border-radius: .6rem;
+  padding: 0.4rem 0.95rem;
+  border-radius: 0.6rem;
 }
 
 .location-details {
   display: flex;
-  align-items: center; 
+  align-items: center;
   margin-top: 2rem;
   gap: 3rem;
 }
@@ -79,14 +120,15 @@
   gap: 2rem;
 }
 
-.desc-box, .amenities-box {
+.desc-box,
+.amenities-box {
   margin-top: 2rem;
 }
 
 .description {
   display: flex;
   align-items: center;
-  gap: .5rem;
+  gap: 0.5rem;
 }
 
 .desc-content {
@@ -109,10 +151,10 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: 1.3rem .9rem;
-  border-radius: .7rem;
+  padding: 1.3rem 0.9rem;
+  border-radius: 0.7rem;
   cursor: pointer;
-  transform: all .7ms ease-in-out;
+  transform: all 0.7ms ease-in-out;
 }
 
 .amenity-box:hover {

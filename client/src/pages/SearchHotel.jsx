@@ -29,6 +29,7 @@ const SearchHotel = () => {
   );
 
   console.log(location);
+  console.log(state)
 
   console.log(data);
 

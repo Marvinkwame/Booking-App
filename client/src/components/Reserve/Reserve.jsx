@@ -1,8 +1,9 @@
 import React from 'react'
+import "./Reserve.css"
 
 const Reserve = () => {
   return (
-    <div>Reserve</div>
+    <div className='reserv-container'>Reserve</div>
   )
 }
 

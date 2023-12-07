@@ -4,7 +4,7 @@ const { createHotel, updateHotel, deleteHotel, getSingleHotel, getAllHotels, cou
 const { verifyToken, verifyUser, verifyAdmin } = require("../utils/verifyToken");
 
 router.post('/', verifyAdmin, createHotel);
-router.put('/:id', verifyAdmin, updateHotel);
+router.patch('/:id', verifyAdmin, updateHotel);
 router.delete('/:id', verifyAdmin, deleteHotel);
 router.get("/find/:id", getSingleHotel);
 router.get("/", getAllHotels);

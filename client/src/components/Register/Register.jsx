@@ -1,8 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Register.css";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+  const [userDetails, setUserDetails] = useState({
+    username: '',
+    email: '',
+    password: '',
+    phone: '',
+    city: '',
+    country: ''
+  })
+  const [responseError, setResponseError] = React.useState('')
+
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setUserDetails((prevUserDetails) => {
+      return {
+        ...prevUserDetails,
+        [e.target.id]: e.target.value,
+      }
+    })
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post('auth/register', {
+        ...userDetails,
+      })
+    } catch (err) {
+      // If there's an error from the backend, update the responseError state with the error message.
+      if (err.response && err.response.data && err.response.data.error) {
+        setResponseError(err.response.data.error);
+      } else {
+        // If the error is not coming from the backend response, log it to the console for further investigation.
+        console.log("An unexpected error occurred:", err);
+      }
+    }
+  }
+
+
   return (
     <section className="login">
       <div className="first-section">
@@ -16,21 +57,34 @@ const Register = () => {
             width: "70%",
             marginTop: "1.5rem",
           }}
+          onSubmit={handleSubmit}
         >
           <div className="form-element">
-            <label htmlFor="email">Full Name</label>
-            <input type="text" name="" id="" placeholder="Enter your name" />
+            <label htmlFor="text">Full Name</label>
+            <input type="text" name="username" id="username" onChange={handleChange} placeholder="Enter your name" />
           </div>
           <div className="form-element">
             <label htmlFor="email">Email</label>
-            <input type="email" name="" id="" className="" placeholder="kobe@gmail.com" />
+            <input type="email" name="email" id="email" onChange={handleChange} className="" placeholder="kobe@gmail.com" />
           </div>
           <div className="form-element">
             <label htmlFor="">Password</label>
-            <input type="password" name="" id="" className="" />
+            <input type="password" name="password" onChange={handleChange} id="password" className="" />
+          </div>
+          <div className="form-element">
+            <label htmlFor="">Telephone</label>
+            <input type="tel" name="phone" onChange={handleChange} id="phone"  />
+          </div>
+          <div className="form-element">
+            <label htmlFor="">City</label>
+            <input type="text" name="city" onChange={handleChange} id="city" className="" />
+          </div>
+          <div className="form-element">
+            <label htmlFor="">Country</label>
+            <input type="country" name="country" onChange={handleChange} id="country" className="" />
           </div>
 
-          <button className="btn signin-btn">Sign In</button>
+          <button type="submit" className="btn signin-btn">Sign In</button>
           <p style={{ textAlign: "center" }}>
             Already have an account?{" "}
             <Link to="/login" style={{ color: "blueviolet", fontWeight: "900" }} className="link">
